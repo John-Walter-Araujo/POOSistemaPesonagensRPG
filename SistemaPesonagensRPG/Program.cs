@@ -4,7 +4,15 @@
     {
         static void Main(string[] args)
         {
-            Personagens personagem1 = new Personagens("Guerreiro", 100, 1, 0, 20);
+            Personagens GuerreiroJohn = new Personagens ("Guerreiro", 20);
+
+
+            GuerreiroJohn.GanharExperiencia(120);
+
+
+
+           
+
         }
     }
 }

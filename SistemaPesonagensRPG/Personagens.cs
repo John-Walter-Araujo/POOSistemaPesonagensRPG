@@ -55,6 +55,7 @@ namespace SistemaPesonagensRPG
             }
         }
         public int Experiencia { get; private set; }
+
         public int Nivel { get; private set; }
         public int PoderAtaque { get; private set; }
 
@@ -64,7 +65,7 @@ namespace SistemaPesonagensRPG
         #region Métodos
         public void Curar(int quantidade)
         {
-            if(PontosVida == 0)
+            if (PontosVida == 0)
             {
                 Console.WriteLine("O personagem já foi derrotado e não pode ser curado.");
                 return;
@@ -75,6 +76,45 @@ namespace SistemaPesonagensRPG
                 Console.WriteLine($"O personagem {Nome} foi curado em {quantidade} pontos de vida. Pontos de vida atuais: {PontosVida}");
             }
         }
-        #endregion
+
+        public void ReceberDano(int dano)
+        {
+            if (PontosVida == 0)
+            {
+                Console.WriteLine("Personagem foi derrotado!");
+                return;
+            }
+            else if (PontosVida > 0)
+            {
+                PontosVida -= dano;
+                Console.WriteLine($"{Nome} sofreu {dano} de dano! || Vida restante: {PontosVida}/100");
+            }
+        }
+
+        public void GanharExperiencia(int xp)
+        {
+            if (xp < 0)
+            {
+                Console.WriteLine("Quantidade de XP inválida");
+            }
+                Experiencia += xp;
+                Console.WriteLine($"{Nome} ganhou {xp} XP. Experiência atual: {Experiencia}");
+
+              
+            while (Experiencia >= 100)
+            {
+                Nivel++;
+                Experiencia -= 100;
+                PontosVida = 100;
+                PoderAtaque += 5;
+
+                Console.WriteLine($"PARABÉNS!!! O {Nome} SUBIU PARA O NÍVEL {Nivel}!");
+       
+
+            }
+        }
+
+
     }
+        #endregion
 }
