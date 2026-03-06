@@ -40,7 +40,7 @@ namespace SistemaPesonagensRPG
             get { return _pontosVida; }
             private set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
                     _pontosVida = 0;
                 }
@@ -63,6 +63,22 @@ namespace SistemaPesonagensRPG
         #endregion
 
         #region Métodos
+
+        public void Atacar(Personagens alvo)
+        {
+            if(PontosVida > 0)
+            {
+                alvo.ReceberDano(PoderAtaque);
+            }
+            else
+            {
+                Console.WriteLine("Ação Indisponível, o personagem alvo está morto.");
+            }
+        }
+
+
+
+
         public void Curar(int quantidade)
         {
             if (PontosVida == 0)
@@ -79,14 +95,19 @@ namespace SistemaPesonagensRPG
 
         public void ReceberDano(int dano)
         {
-            if (PontosVida == 0)
+            if (PontosVida <= 0)
             {
+                
                 Console.WriteLine("Personagem foi derrotado!");
                 return;
             }
             else if (PontosVida > 0)
             {
                 PontosVida -= dano;
+                if(PontosVida <= 0)
+                {
+                    PontosVida = 0;
+                }
                 Console.WriteLine($"{Nome} sofreu {dano} de dano! || Vida restante: {PontosVida}/100");
             }
         }
